@@ -1,0 +1,2699 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="x-poe-datastore-behavior" content="local_only" />
+    <!-- <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;"
+    /> -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>50 States Skydiving World Record Challenge | Live Tracking</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+
+      :root {
+          --primary: #0ea5e9;
+          --primary-dark: #0284c7;
+          --secondary: #8b5cf6;
+          --accent: #f59e0b;
+          --success: #10b981;
+          --danger: #ef4444;
+          --warning: #f59e0b;
+          --dark: #0f172a;
+          --dark-light: #1e293b;
+          --gray: #64748b;
+          --gray-light: #94a3b8;
+          --gray-lighter: #e2e8f0;
+          --white: #ffffff;
+          --bg-primary: #f8fafc;
+          --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);
+          --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+          --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+          --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+          --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+          --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+          --blur: backdrop-filter: blur(16px);
+      }
+
+      body {
+          font-family: 'Inter', sans-serif;
+          line-height: 1.6;
+          color: var(--dark);
+          background: var(--bg-primary);
+      }
+
+      /* Utilities */
+      .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 1rem;
+      }
+
+      .text-center { text-align: center; }
+      .text-white { color: var(--white); }
+      .text-primary { color: var(--primary); }
+      .text-gray { color: var(--gray); }
+      .font-bold { font-weight: 700; }
+      .font-semibold { font-weight: 600; }
+      .font-medium { font-weight: 500; }
+
+      /* Header */
+      .header {
+          background: var(--gradient-hero);
+          color: var(--white);
+          padding: 4rem 0;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .header::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+          animation: float 20s ease-in-out infinite;
+      }
+
+      @keyframes float {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-10px) rotate(1deg); }
+      }
+
+      .hero-content {
+          position: relative;
+          z-index: 2;
+          text-align: center;
+          animation: fadeInUp 1s ease-out;
+      }
+
+      .hero-title {
+          font-size: clamp(2.5rem, 5vw, 4rem);
+          font-weight: 900;
+          margin-bottom: 1.5rem;
+          background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          line-height: 1.1;
+      }
+
+      .hero-subtitle {
+          font-size: 1.25rem;
+          margin-bottom: 2rem;
+          opacity: 0.9;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+      }
+
+      .hero-stats {
+          display: flex;
+          justify-content: center;
+          gap: 3rem;
+          margin-top: 3rem;
+          flex-wrap: wrap;
+      }
+
+      .hero-stat {
+          text-align: center;
+      }
+
+      .hero-stat-number {
+          font-size: 3rem;
+          font-weight: 900;
+          display: block;
+          color: var(--accent);
+      }
+
+      .hero-stat-label {
+          font-size: 0.875rem;
+          opacity: 0.8;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+      }
+
+      /* Live Timer in Hero */
+      .hero-live-timer {
+          margin-top: 2rem;
+          padding: 1.5rem;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 1rem;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          background: var(--blur);
+          max-width: 400px;
+          margin-left: auto;
+          margin-right: auto;
+      }
+
+      .hero-timer-label {
+          font-size: 0.875rem;
+          opacity: 0.8;
+          margin-bottom: 0.5rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+      }
+
+      .hero-timer-display {
+          font-family: 'Inter', monospace;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--white);
+      }
+
+      .hero-timer-display.running {
+          animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.8; }
+      }
+
+      @keyframes fadeInUp {
+          from {
+              opacity: 0;
+              transform: translateY(30px);
+          }
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      /* Navigation */
+      .nav {
+          background: rgba(255, 255, 255, 0.95);
+          background:var(--blur);
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          border-bottom: 1px solid var(--gray-lighter);
+      }
+
+      .nav-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1rem 0;
+      }
+
+      .nav-logo {
+          font-size: 1.5rem;
+          font-weight: 800;
+          color: var(--primary);
+          text-decoration: none;
+      }
+
+      .nav-links {
+          display: flex;
+          gap: 2rem;
+          list-style: none;
+      }
+
+      .nav-link {
+          color: var(--gray);
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.2s ease;
+      }
+
+      .nav-link:hover {
+          color: var(--primary);
+      }
+
+      .admin-btn {
+          background: var(--gradient-primary);
+          color: var(--white);
+          padding: 0.5rem 1.5rem;
+          border-radius: 0.5rem;
+          text-decoration: none;
+          font-weight: 600;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .admin-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-lg);
+      }
+
+      /* Live Location Banner */
+      .live-location-banner {
+          background: linear-gradient(90deg, var(--success) 0%, var(--primary) 100%);
+          color: var(--white);
+          padding: 1rem 0;
+          text-align: center;
+          animation: pulse 2s ease-in-out infinite;
+      }
+
+      .live-location-content {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          flex-wrap: wrap;
+      }
+
+      .live-indicator {
+          width: 12px;
+          height: 12px;
+          background: var(--white);
+          border-radius: 50%;
+          animation: blink 1s ease-in-out infinite;
+      }
+
+      .location-text {
+          font-weight: 600;
+          font-size: 1.1rem;
+      }
+
+      .location-details {
+          font-size: 0.9rem;
+          opacity: 0.9;
+      }
+
+      @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.3; }
+      }
+
+      /* Progress Section */
+      .progress-section {
+          padding: 4rem 0;
+          background: var(--white);
+      }
+
+      .section-title {
+          font-size: 2.5rem;
+          font-weight: 800;
+          text-align: center;
+          margin-bottom: 3rem;
+          background: var(--gradient-primary);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+      }
+
+      .progress-container {
+          max-width: 1000px;
+          margin: 0 auto;
+          background: var(--white);
+          padding: 3rem;
+          border-radius: 1rem;
+          box-shadow: var(--shadow-xl);
+          border: 1px solid var(--gray-lighter);
+      }
+
+      .progress-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 2rem;
+      }
+
+      .progress-percentage {
+          font-size: 3rem;
+          font-weight: 900;
+          color: var(--success);
+      }
+
+      .progress-bar {
+          height: 1rem;
+          background: var(--gray-lighter);
+          border-radius: 0.5rem;
+          overflow: hidden;
+          margin: 2rem 0;
+          position: relative;
+      }
+
+      .progress-fill {
+          height: 100%;
+          background: linear-gradient(90deg, var(--success) 0%, var(--primary) 100%);
+          border-radius: 0.5rem;
+          transition: width 1s ease-out;
+          position: relative;
+      }
+
+      .progress-fill::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+          animation: shimmer 2s infinite;
+      }
+
+      @keyframes shimmer {
+          to { left: 100%; }
+      }
+
+      .progress-details {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          gap: 1.5rem;
+          margin-top: 2rem;
+      }
+
+      .progress-detail {
+          text-align: center;
+          padding: 1rem;
+          background: var(--bg-primary);
+          border-radius: 0.5rem;
+      }
+
+      .progress-detail-number {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--primary);
+      }
+
+      .progress-detail-label {
+          font-size: 0.875rem;
+          color: var(--gray);
+          margin-top: 0.25rem;
+      }
+
+      /* Current Location Section */
+      .current-location-section {
+          background: var(--bg-primary);
+          padding: 2rem 0;
+      }
+
+      .current-location-card {
+          max-width: 800px;
+          margin: 0 auto;
+          background: var(--white);
+          border-radius: 1rem;
+          padding: 2rem;
+          box-shadow: var(--shadow-md);
+          border-left: 4px solid var(--primary);
+      }
+
+      .location-header {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+      }
+
+      .location-icon {
+          font-size: 2rem;
+          color: var(--primary);
+      }
+
+      .location-title {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--dark);
+      }
+
+      .location-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 1rem;
+      }
+
+      .location-item {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.75rem;
+          background: var(--bg-primary);
+          border-radius: 0.5rem;
+      }
+
+      .location-item-icon {
+          color: var(--gray);
+      }
+
+      .location-item-text {
+          font-size: 0.875rem;
+          color: var(--dark);
+      }
+
+      /* Live Timer */
+      .timer-section {
+          background: var(--dark);
+          color: var(--white);
+          padding: 4rem 0;
+          text-align: center;
+      }
+
+      .timer-container {
+          max-width: 600px;
+          margin: 0 auto;
+      }
+
+      .timer-title {
+          font-size: 2rem;
+          font-weight: 700;
+          margin-bottom: 2rem;
+          opacity: 0.9;
+      }
+
+      .timer-display {
+          font-family: 'Inter', monospace;
+          font-size: clamp(2rem, 8vw, 4rem);
+          font-weight: 900;
+          margin: 2rem 0;
+          padding: 2rem;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 1rem;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          background:var(--blur);
+      }
+
+      .timer-display.running {
+          animation: pulse 2s ease-in-out infinite;
+      }
+
+      .timer-labels {
+          display: flex;
+          justify-content: space-around;
+          margin-top: 1rem;
+          font-size: 0.875rem;
+          opacity: 0.7;
+      }
+
+      .timer-status {
+          margin-top: 2rem;
+          padding: 1rem 2rem;
+          background: var(--success);
+          color: var(--white);
+          border-radius: 2rem;
+          display: inline-block;
+          font-weight: 600;
+      }
+
+      /* States Grid */
+      .states-section {
+          padding: 4rem 0;
+          background: var(--bg-primary);
+      }
+
+      .states-filter {
+          display: flex;
+          justify-content: center;
+          gap: 1rem;
+          margin-bottom: 3rem;
+          flex-wrap: wrap;
+      }
+
+      .filter-btn {
+          padding: 0.75rem 1.5rem;
+          border: 2px solid var(--primary);
+          background: transparent;
+          color: var(--primary);
+          border-radius: 2rem;
+          cursor: pointer;
+          font-weight: 600;
+          transition: all 0.2s ease;
+      }
+
+      .filter-btn.active,
+      .filter-btn:hover {
+          background: var(--primary);
+          color: var(--white);
+          transform: translateY(-2px);
+      }
+
+      .states-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 1.5rem;
+          max-width: 1200px;
+          margin: 0 auto;
+      }
+
+      .state-card {
+          background: var(--white);
+          border-radius: 1rem;
+          padding: 1.5rem;
+          box-shadow: var(--shadow-md);
+          border: 1px solid var(--gray-lighter);
+          transition: all 0.3s ease;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .state-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 4px;
+          background: var(--gradient-primary);
+          transition: left 0.3s ease;
+      }
+
+      .state-card:hover {
+          transform: translateY(-4px);
+          box-shadow: var(--shadow-xl);
+      }
+
+      .state-card:hover::before {
+          left: 0;
+      }
+
+      .state-card.completed {
+          border-color: var(--success);
+          background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+      }
+
+      .state-card.completed::before {
+          background: var(--success);
+          left: 0;
+      }
+
+      .state-card.current-location {
+          border: 2px solid var(--warning);
+          background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+          animation: currentStatePulse 2s ease-in-out infinite;
+          box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+      }
+
+      .state-card.current-location::before {
+          background: var(--warning);
+          left: 0;
+      }
+
+      .state-card.current-location .state-live-indicator {
+          display: block;
+      }
+
+      @keyframes currentStatePulse {
+          0%, 100% {
+              transform: scale(1);
+              box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+          }
+          50% {
+              transform: scale(1.02);
+              box-shadow: 0 0 30px rgba(245, 158, 11, 0.5);
+          }
+      }
+
+      .state-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 1rem;
+      }
+
+      .state-name {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--dark);
+      }
+
+      .state-status {
+          font-size: 0.875rem;
+          font-weight: 600;
+          padding: 0.25rem 0.75rem;
+          border-radius: 1rem;
+          background: var(--gray-lighter);
+          color: var(--gray);
+          position: relative;
+      }
+
+      .state-status.completed {
+          background: var(--success);
+          color: var(--white);
+      }
+
+      .state-status.current {
+          background: var(--warning);
+          color: var(--white);
+          animation: blink 1.5s ease-in-out infinite;
+      }
+
+      .state-live-indicator {
+          display: none;
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          width: 12px;
+          height: 12px;
+          background: var(--danger);
+          border: 2px solid var(--white);
+          border-radius: 50%;
+          animation: livePulse 1s ease-in-out infinite;
+      }
+
+      @keyframes livePulse {
+          0%, 100% {
+              opacity: 1;
+              transform: scale(1);
+          }
+          50% {
+              opacity: 0.5;
+              transform: scale(1.2);
+          }
+      }
+
+      .state-details {
+          font-size: 0.875rem;
+          color: var(--gray);
+          line-height: 1.4;
+      }
+
+      .state-meta {
+          margin-top: 1rem;
+          padding-top: 1rem;
+          border-top: 1px solid var(--gray-lighter);
+          font-size: 0.75rem;
+          color: var(--gray-light);
+      }
+
+      /* Weather Widget */
+      .weather-widget {
+          margin-top: 1rem;
+          padding: 0.75rem;
+          background: rgba(14, 165, 233, 0.1);
+          border-radius: 0.5rem;
+          border-left: 3px solid var(--primary);
+      }
+
+      .weather-info {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 0.8rem;
+          color: var(--dark);
+      }
+
+      /* Modal Styles */
+      .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.8);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(5px);
+      }
+
+      .modal-overlay.active {
+          opacity: 1;
+          visibility: visible;
+      }
+
+      .modal {
+          background: var(--white);
+          border-radius: 1rem;
+          width: 90%;
+          max-width: 800px;
+          max-height: 90vh;
+          overflow-y: auto;
+          position: relative;
+          transform: scale(0.9) translateY(50px);
+          transition: all 0.3s ease;
+          box-shadow: var(--shadow-xl);
+      }
+
+      .modal-overlay.active .modal {
+          transform: scale(1) translateY(0);
+      }
+
+      .modal-header {
+          padding: 2rem 2rem 1rem;
+          border-bottom: 1px solid var(--gray-lighter);
+          position: sticky;
+          top: 0;
+          background: var(--white);
+          z-index: 10;
+      }
+
+      .modal-title {
+          font-size: 2rem;
+          font-weight: 800;
+          color: var(--dark);
+          margin-bottom: 0.5rem;
+      }
+
+      .modal-subtitle {
+          color: var(--gray);
+          font-size: 1rem;
+      }
+
+      .modal-close {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          background: none;
+          border: none;
+          font-size: 2rem;
+          cursor: pointer;
+          color: var(--gray);
+          transition: color 0.2s ease;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+      }
+
+      .modal-close:hover {
+          color: var(--danger);
+          background: var(--gray-lighter);
+      }
+
+      .modal-content {
+          padding: 2rem;
+      }
+
+      .modal-section {
+          margin-bottom: 2rem;
+      }
+
+      .modal-section-title {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--dark);
+          margin-bottom: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+      }
+
+      .state-info-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 1rem;
+          margin-bottom: 2rem;
+      }
+
+      .state-info-item {
+          background: var(--bg-primary);
+          padding: 1rem;
+          border-radius: 0.5rem;
+          border-left: 4px solid var(--primary);
+      }
+
+      .state-info-label {
+          font-size: 0.875rem;
+          color: var(--gray);
+          margin-bottom: 0.25rem;
+          font-weight: 500;
+      }
+
+      .state-info-value {
+          font-size: 1.125rem;
+          font-weight: 700;
+          color: var(--dark);
+      }
+
+      .video-gallery {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 1.5rem;
+      }
+
+      .video-item {
+          background: var(--bg-primary);
+          border-radius: 0.75rem;
+          overflow: hidden;
+          border: 1px solid var(--gray-lighter);
+          transition: all 0.3s ease;
+      }
+
+      .video-item:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-lg);
+      }
+
+      .video-player {
+          width: 100%;
+          height: 200px;
+          background: var(--dark);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--white);
+          font-size: 3rem;
+          position: relative;
+          cursor: pointer;
+      }
+
+      .video-player video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+      }
+
+      .video-play-button {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: rgba(0, 0, 0, 0.7);
+          border: none;
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+          color: var(--white);
+          font-size: 1.5rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .video-play-button:hover {
+          background: rgba(0, 0, 0, 0.9);
+          transform: translate(-50%, -50%) scale(1.1);
+      }
+
+      .video-info {
+          padding: 1rem;
+      }
+
+      .video-title {
+          font-weight: 700;
+          color: var(--dark);
+          margin-bottom: 0.5rem;
+      }
+
+      .video-meta {
+          font-size: 0.875rem;
+          color: var(--gray);
+      }
+
+      .no-data {
+          text-align: center;
+          padding: 3rem;
+          color: var(--gray);
+      }
+
+      .no-data-icon {
+          font-size: 4rem;
+          margin-bottom: 1rem;
+          opacity: 0.5;
+      }
+
+      /* Milestones */
+      .milestones-section {
+          padding: 4rem 0;
+          background: var(--white);
+      }
+
+      .milestone-list {
+          max-width: 800px;
+          margin: 0 auto;
+          max-height: 600px;
+          overflow-y: auto;
+          padding-right: 1rem;
+      }
+
+      .milestone-list::-webkit-scrollbar {
+          width: 6px;
+      }
+
+      .milestone-list::-webkit-scrollbar-track {
+          background: var(--gray-lighter);
+          border-radius: 3px;
+      }
+
+      .milestone-list::-webkit-scrollbar-thumb {
+          background: var(--primary);
+          border-radius: 3px;
+      }
+
+      .milestone-item {
+          background: var(--white);
+          border: 1px solid var(--gray-lighter);
+          border-radius: 1rem;
+          padding: 1.5rem;
+          margin-bottom: 1rem;
+          border-left: 4px solid var(--primary);
+          transition: all 0.3s ease;
+          animation: slideIn 0.5s ease-out;
+      }
+
+      .milestone-item:hover {
+          transform: translateX(8px);
+          box-shadow: var(--shadow-lg);
+      }
+
+      .milestone-item.completed {
+          border-left-color: var(--success);
+      }
+
+      .milestone-item.system {
+          border-left-color: var(--warning);
+          background: #fffbeb;
+      }
+
+      .milestone-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 0.5rem;
+      }
+
+      .milestone-title {
+          font-size: 1.125rem;
+          font-weight: 700;
+          color: var(--dark);
+      }
+
+      .milestone-time {
+          font-size: 0.875rem;
+          color: var(--gray);
+          font-weight: 500;
+      }
+
+      .milestone-details {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+          gap: 0.5rem;
+          margin-top: 1rem;
+          font-size: 0.875rem;
+          color: var(--gray);
+      }
+
+      @keyframes slideIn {
+          from {
+              opacity: 0;
+              transform: translateX(-20px);
+          }
+          to {
+              opacity: 1;
+              transform: translateX(0);
+          }
+      }
+
+      /* Footer */
+      .footer {
+          background: var(--dark);
+          color: var(--white);
+          padding: 3rem 0 2rem;
+          text-align: center;
+      }
+
+      .footer-content {
+          max-width: 600px;
+          margin: 0 auto;
+      }
+
+      .footer-title {
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+      }
+
+      .footer-text {
+          opacity: 0.8;
+          margin-bottom: 2rem;
+      }
+
+      .footer-links {
+          display: flex;
+          justify-content: center;
+          gap: 2rem;
+          margin-bottom: 2rem;
+      }
+
+      .footer-link {
+          color: var(--white);
+          text-decoration: none;
+          opacity: 0.8;
+          transition: opacity 0.2s ease;
+      }
+
+      .footer-link:hover {
+          opacity: 1;
+      }
+
+      .footer-bottom {
+          padding-top: 2rem;
+          border-top: 1px solid var(--dark-light);
+          opacity: 0.6;
+          font-size: 0.875rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+          .hero-stats {
+              gap: 2rem;
+          }
+
+          .nav-links {
+              display: none;
+          }
+
+          .progress-container {
+              padding: 2rem;
+              margin: 0 1rem;
+          }
+
+          .states-grid {
+              grid-template-columns: 1fr;
+              padding: 0 1rem;
+          }
+
+          .milestone-list {
+              padding: 0 1rem;
+          }
+
+          .footer-links {
+              flex-direction: column;
+              gap: 1rem;
+          }
+
+          .modal {
+              width: 95%;
+              margin: 1rem;
+          }
+
+          .modal-content {
+              padding: 1rem;
+          }
+
+          .video-gallery {
+              grid-template-columns: 1fr;
+          }
+
+          .state-info-grid {
+              grid-template-columns: 1fr;
+          }
+
+          .live-location-content {
+              flex-direction: column;
+              gap: 0.5rem;
+          }
+
+          .location-grid {
+              grid-template-columns: 1fr;
+          }
+
+          .hero-live-timer {
+              margin: 1rem;
+          }
+
+          .hero-timer-display {
+              font-size: 1.25rem;
+          }
+      }
+
+      @media (max-width: 480px) {
+          .hero-title {
+              font-size: 2rem;
+          }
+
+          .hero-stats {
+              flex-direction: column;
+              align-items: center;
+              gap: 1.5rem;
+          }
+
+          .timer-display {
+              font-size: 2rem;
+              padding: 1rem;
+          }
+
+          .modal-header {
+              padding: 1rem;
+          }
+
+          .modal-title {
+              font-size: 1.5rem;
+          }
+      }
+
+      /* Loading Animation */
+      .loading {
+          opacity: 0;
+          animation: fadeInUp 0.6s ease-out 0.2s forwards;
+      }
+
+      /* Success Animation */
+      .success-notification {
+          position: fixed;
+          top: 2rem;
+          right: 2rem;
+          background: var(--success);
+          color: var(--white);
+          padding: 1rem 1.5rem;
+          border-radius: 0.5rem;
+          box-shadow: var(--shadow-xl);
+          z-index: 1000;
+          animation: slideInRight 0.3s ease-out, slideOutRight 0.3s ease-in 2.7s forwards;
+      }
+
+      @keyframes slideInRight {
+          from { transform: translateX(100%); }
+          to { transform: translateX(0); }
+      }
+
+      @keyframes slideOutRight {
+          to { transform: translateX(100%); }
+      }
+    </style>
+    <script src="https://puc.poecdn.net/authenticated_preview_page/syncedState.bd4eeeb8e8e02052ee92.js"></script>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="container nav-container">
+        <a href="#" class="nav-logo">🪂 SkyRecord</a>
+        <ul class="nav-links">
+          <li><a href="#progress" class="nav-link">Progress</a></li>
+          <li><a href="#states" class="nav-link">States</a></li>
+          <li><a href="#milestones" class="nav-link">Timeline</a></li>
+        </ul>
+        <a href="admin.html" class="admin-btn">Admin Portal</a>
+      </div>
+    </nav>
+
+    <!-- Live Location Banner -->
+    <div
+      class="live-location-banner"
+      id="liveLocationBanner"
+      style="display: none"
+    >
+      <div class="container">
+        <div class="live-location-content">
+          <div class="live-indicator"></div>
+          <div class="location-text">
+            🎯 LIVE: Currently in <span id="currentLocationState">--</span>
+          </div>
+          <div class="location-details" id="currentLocationDetails">
+            Preparing for next jump
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="header">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">50 States Skydiving World Record Challenge</h1>
+          <p class="hero-subtitle">
+            Conquering the skies across America, one state at a time. Follow the
+            journey live as we attempt to break the world record for the fastest
+            50-state skydiving challenge.
+          </p>
+
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat-number" id="heroCompletedStates">0</span>
+              <span class="hero-stat-label">States Completed</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-number" id="heroElapsedDays">0</span>
+              <span class="hero-stat-label">Days Elapsed</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-number" id="heroPercentage">0%</span>
+              <span class="hero-stat-label">Progress</span>
+            </div>
+          </div>
+
+          <!-- Live Timer in Hero -->
+          <div class="hero-live-timer" id="heroLiveTimer">
+            <div class="hero-timer-label">Live Challenge Timer</div>
+            <div class="hero-timer-display" id="heroTimerDisplay">
+              00:00:00:00
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Current Location Section -->
+    <section
+      class="current-location-section"
+      id="currentLocationSection"
+      style="display: none"
+    >
+      <div class="container">
+        <div class="current-location-card">
+          <div class="location-header">
+            <div class="location-icon">📍</div>
+            <div class="location-title">Current Location &amp; Status</div>
+          </div>
+          <div class="location-grid" id="locationGrid">
+            <!-- Location details will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Progress Section -->
+    <section id="progress" class="progress-section">
+      <div class="container">
+        <h2 class="section-title">Live Progress Tracking</h2>
+        <div class="progress-container loading">
+          <div class="progress-header">
+            <h3 class="font-bold text-xl">Challenge Progress</h3>
+            <div class="progress-percentage" id="progressPercentage">0%</div>
+          </div>
+          <div class="progress-bar">
+            <div
+              class="progress-fill"
+              id="progressFill"
+              style="width: 0%"
+            ></div>
+          </div>
+          <div class="progress-details">
+            <div class="progress-detail">
+              <div class="progress-detail-number" id="remainingStates">50</div>
+              <div class="progress-detail-label">States Remaining</div>
+            </div>
+            <div class="progress-detail">
+              <div class="progress-detail-number" id="avgTimePerState">--</div>
+              <div class="progress-detail-label">Avg Time/State</div>
+            </div>
+            <div class="progress-detail">
+              <div class="progress-detail-number" id="estimatedCompletion">
+                --
+              </div>
+              <div class="progress-detail-label">Est. Completion</div>
+            </div>
+            <div class="progress-detail">
+              <div class="progress-detail-number" id="currentPace">--</div>
+              <div class="progress-detail-label">Current Pace</div>
+            </div>
+            <div class="progress-detail">
+              <div class="progress-detail-number" id="bestDay">--</div>
+              <div class="progress-detail-label">Best Day</div>
+            </div>
+            <div class="progress-detail">
+              <div class="progress-detail-number" id="totalAltitude">--</div>
+              <div class="progress-detail-label">Total Altitude</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Timer -->
+    <section class="timer-section">
+      <div class="container">
+        <div class="timer-container">
+          <h2 class="timer-title">⏱️ Live Challenge Timer</h2>
+          <div class="timer-display" id="timerDisplay">00:00:00:00</div>
+          <div class="timer-labels">
+            <span>Days</span>
+            <span>Hours</span>
+            <span>Minutes</span>
+            <span>Seconds</span>
+          </div>
+          <div class="timer-status" id="timerStatus">Challenge Not Started</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- States Grid -->
+    <section id="states" class="states-section">
+      <div class="container">
+        <h2 class="section-title">State-by-State Progress</h2>
+
+        <div class="states-filter loading">
+          <button class="filter-btn active" onclick="filterStates('all')">
+            All States (50)
+          </button>
+          <button class="filter-btn" onclick="filterStates('completed')">
+            Completed (<span id="completedCount">0</span>)
+          </button>
+          <button class="filter-btn" onclick="filterStates('pending')">
+            Pending (<span id="pendingCount">50</span>)
+          </button>
+          <button class="filter-btn" onclick="filterStates('current')">
+            Current (<span id="currentCount">0</span>)
+          </button>
+        </div>
+
+        <div class="states-grid loading" id="statesGrid">
+          <!-- States will be populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Milestones Timeline -->
+    <section id="milestones" class="milestones-section">
+      <div class="container">
+        <h2 class="section-title">Mission Timeline</h2>
+        <div class="milestone-list loading" id="milestonesList">
+          <div class="milestone-item system">
+            <div class="milestone-header">
+              <div class="milestone-title">🎯 Challenge System Initialized</div>
+              <div class="milestone-time" id="initTime"></div>
+            </div>
+            <p>
+              50-State Skydiving World Record tracking system is active and
+              ready to monitor the historic attempt.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- State Detail Modal -->
+    <div class="modal-overlay" id="stateModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 class="modal-title" id="modalTitle">State Name</h2>
+          <p class="modal-subtitle" id="modalSubtitle">
+            Skydiving Details &amp; Media
+          </p>
+          <button class="modal-close" onclick="closeStateModal()">×</button>
+        </div>
+        <div class="modal-content" id="modalContent">
+          <!-- Content will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <h3 class="footer-title">🪂 SkyRecord Challenge</h3>
+          <p class="footer-text">
+            Following the ultimate skydiving adventure across all 50 United
+            States. Every jump tracked, every milestone recorded, every second
+            counted.
+          </p>
+          <div class="footer-links">
+            <a href="#" class="footer-link">About</a>
+            <a href="#" class="footer-link">Contact</a>
+            <a href="admin.html" class="footer-link">Admin</a>
+            <a href="#" class="footer-link">Privacy</a>
+          </div>
+          <div class="footer-bottom">
+            <p>
+              © 2024 SkyRecord Challenge. All rights reserved. | Live tracking
+              system active
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // US States Array
+      const STATES = [
+        "Alabama",
+        "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Connecticut",
+        "Delaware",
+        "Florida",
+        "Georgia",
+        "Hawaii",
+        "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Pennsylvania",
+        "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "Utah",
+        "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming",
+      ];
+      const API_BASE_URL =
+        "https://sky-diving-backend-production.up.railway.app";
+
+      // Challenge data
+      let challengeData = {
+        isActive: false,
+        startTime: null,
+        completedStates: [],
+        milestones: [],
+        lastUpdate: null,
+        currentLocation: null,
+        weatherData: {},
+        streakData: {
+          current: 0,
+          best: 0,
+          lastJumpDate: null,
+        },
+      };
+
+      let timerInterval = null;
+      let currentFilter = "all";
+
+      // Initialize application
+      function initializeApp() {
+        loadChallengeData();
+        updateAllDisplays();
+        startRealTimeUpdates();
+
+        // Set initialization time
+        document.getElementById("initTime").textContent = formatDateTime(
+          new Date()
+        );
+
+        // Simulate current location for demo
+        simulateCurrentLocation();
+
+        console.log("🚁 SkyRecord tracking system initialized");
+      }
+
+      // Simulate current location (in real app, this would come from API/GPS)
+      function simulateCurrentLocation() {
+        if (
+          challengeData.isActive &&
+          challengeData.completedStates.length < 50
+        ) {
+          // Simulate being in a state that hasn't been completed yet
+          const remainingStates = STATES.filter(
+            (state) => !challengeData.completedStates.includes(state)
+          );
+          if (remainingStates.length > 0) {
+            const currentState =
+              remainingStates[
+                Math.floor(Math.random() * Math.min(3, remainingStates.length))
+              ];
+            challengeData.currentLocation = {
+              state: currentState,
+              city: getRandomCity(currentState),
+              arrivalTime: new Date(
+                Date.now() - Math.random() * 24 * 60 * 60 * 1000
+              ),
+              status: "Preparing for jump",
+              weather: generateWeatherData(),
+              estimatedJumpTime: new Date(
+                Date.now() + Math.random() * 6 * 60 * 60 * 1000
+              ),
+              dropZone: `${currentState} Skydiving Center`,
+            };
+          }
+        }
+      }
+
+      function getRandomCity(state) {
+        const cities = {
+          California: [
+            "Los Angeles",
+            "San Francisco",
+            "San Diego",
+            "Sacramento",
+          ],
+          Texas: ["Houston", "Dallas", "Austin", "San Antonio"],
+          Florida: ["Miami", "Orlando", "Tampa", "Jacksonville"],
+          "New York": ["New York City", "Buffalo", "Albany", "Syracuse"],
+          Illinois: ["Chicago", "Springfield", "Rockford", "Peoria"],
+        };
+
+        const stateCities = cities[state] || [
+          "Downtown",
+          "Central",
+          "Metro Area",
+        ];
+        return stateCities[Math.floor(Math.random() * stateCities.length)];
+      }
+
+      function generateWeatherData() {
+        const conditions = [
+          "Clear skies",
+          "Partly cloudy",
+          "Mostly sunny",
+          "Overcast",
+          "Light winds",
+        ];
+        const temps = [65, 72, 68, 75, 70, 73, 69];
+        const winds = [5, 8, 12, 15, 10, 6, 9];
+
+        return {
+          condition: conditions[Math.floor(Math.random() * conditions.length)],
+          temperature: temps[Math.floor(Math.random() * temps.length)],
+          windSpeed: winds[Math.floor(Math.random() * winds.length)],
+          visibility: Math.floor(Math.random() * 5) + 8, // 8-12 miles
+        };
+      }
+
+      // Load data from localStorage
+      async function getc_data(cid) {
+        console.log("Fetching challenge data for CID:", cid);
+
+        const response = await fetch(`${API_BASE_URL}/admin/getchallengedata`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ cid }), // ✅ Wrap cid in an object
+        });
+
+        if (!response.ok) {
+          console.error("Failed to fetch challenge data");
+          return null;
+        }
+
+        const result = await response.json();
+        if (response.ok && result["error"] == "Data not found") {
+          console.error("Failed to fetch challenge data");
+          return null;
+        }
+
+        for (let i of result.completedStates) {
+          if (challengeData.completedStates.includes(i)) {
+            return null; // skip adding duplicates
+          } else {
+          }
+        }
+
+        challengeData = {
+          ...challengeData, // keep existing frontend data
+          ...result, // update top-level fields from backend
+          completedStates: [
+            ...challengeData.completedStates,
+            ...(result.completedStates || []),
+          ],
+          milestones: [
+            ...challengeData.milestones,
+            ...(result.milestones || []),
+          ],
+          currentLocation:
+            result.currentLocation || challengeData.currentLocation,
+        };
+        console.log("Challenge data received:", result);
+        console.log("The new challenge data is", challengeData);
+        return true;
+      }
+
+      // Data Management
+      async function loadChallengeData() {
+        try {
+          const cid = localStorage.getItem("challenge_id");
+          console.log(cid);
+          const response = await getc_data(cid); // ✅ await
+
+          if (response) {
+            // Resume timer if active
+            if (challengeData.isActive && challengeData.startTime) {
+              startTimer();
+            }
+            updateAllDisplays();
+          }
+        } catch (error) {
+          console.error("Failed to load challenge data:", error);
+          showNotification("⚠️ Failed to load data", "error");
+        }
+      }
+
+      // Timer functions
+      function startTimer() {
+        if (timerInterval) clearInterval(timerInterval);
+
+        const timerDisplay = document.getElementById("timerDisplay");
+        const heroTimerDisplay = document.getElementById("heroTimerDisplay");
+
+        timerDisplay.classList.add("running");
+        heroTimerDisplay.classList.add("running");
+
+        timerInterval = setInterval(updateTimer, 1000);
+        updateTimer(); // Update immediately
+      }
+
+      function stopTimer() {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+
+        const timerDisplay = document.getElementById("timerDisplay");
+        const heroTimerDisplay = document.getElementById("heroTimerDisplay");
+
+        timerDisplay.classList.remove("running");
+        heroTimerDisplay.classList.remove("running");
+      }
+
+      function updateTimer() {
+        if (!challengeData.startTime) {
+          document.getElementById("timerDisplay").textContent = "00:00:00:00";
+          document.getElementById("heroTimerDisplay").textContent =
+            "00:00:00:00";
+          return;
+        }
+
+        const elapsed = calculateElapsedTime();
+        const formatted = formatTimerDisplay(elapsed);
+
+        document.getElementById("timerDisplay").textContent = formatted;
+        document.getElementById("heroTimerDisplay").textContent = formatted;
+
+        // Update hero stats
+        const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+        document.getElementById("heroElapsedDays").textContent = days;
+      }
+
+      function calculateElapsedTime() {
+        if (!challengeData.startTime) return 0;
+
+        const startTime = new Date(challengeData.startTime);
+        const now = new Date();
+        return Math.max(0, now - startTime);
+      }
+
+      function formatTimerDisplay(milliseconds) {
+        const totalSeconds = Math.floor(milliseconds / 1000);
+        const days = Math.floor(totalSeconds / (24 * 3600));
+        const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        return `${days.toString().padStart(2, "0")}:${hours
+          .toString()
+          .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds
+          .toString()
+          .padStart(2, "0")}`;
+      }
+
+      // Update all displays
+      function updateAllDisplays() {
+        updateHeroStats();
+        updateProgressSection();
+        updateTimerStatus();
+        updateCurrentLocationDisplay();
+        updateStatesGrid();
+        updateMilestonesList();
+      }
+
+      function updateHeroStats() {
+        const completed = challengeData.completedStates.length;
+        const percentage = Math.round((completed / 50) * 100);
+
+        animateNumber("heroCompletedStates", completed);
+        animateNumber("heroPercentage", percentage, "%");
+      }
+
+      function updateProgressSection() {
+        const completed = challengeData.completedStates.length;
+        const percentage = (completed / 50) * 100;
+
+        document.getElementById("progressPercentage").textContent =
+          percentage.toFixed(1) + "%";
+        document.getElementById("progressFill").style.width = percentage + "%";
+        document.getElementById("remainingStates").textContent = 50 - completed;
+
+        // Calculate enhanced metrics
+        if (completed > 0 && challengeData.startTime) {
+          const elapsed = calculateElapsedTime();
+          const avgTime = elapsed / completed;
+          const avgFormatted = formatDuration(avgTime);
+          document.getElementById("avgTimePerState").textContent = avgFormatted;
+
+          // Estimate completion
+          if (challengeData.isActive) {
+            const remainingTime = avgTime * (50 - completed);
+            const estimatedDate = new Date(Date.now() + remainingTime);
+            document.getElementById("estimatedCompletion").textContent =
+              formatDate(estimatedDate);
+
+            // Current pace
+            const days = Math.max(
+              1,
+              Math.floor(elapsed / (1000 * 60 * 60 * 24))
+            );
+            const pace = (completed / days).toFixed(1);
+            document.getElementById("currentPace").textContent =
+              pace + " states/day";
+          } else {
+            document.getElementById("estimatedCompletion").textContent =
+              "Paused";
+            document.getElementById("currentPace").textContent = "Paused";
+          }
+
+          // Best day calculation
+          const bestDay = calculateBestDay();
+          document.getElementById("bestDay").textContent = bestDay + " states";
+
+          // Total altitude
+          const totalAltitude = calculateTotalAltitude();
+          document.getElementById("totalAltitude").textContent =
+            totalAltitude.toLocaleString() + " ft";
+        } else {
+          document.getElementById("avgTimePerState").textContent = "--";
+          document.getElementById("estimatedCompletion").textContent = "--";
+          document.getElementById("currentPace").textContent = "--";
+          document.getElementById("bestDay").textContent = "--";
+          document.getElementById("totalAltitude").textContent = "--";
+        }
+      }
+
+      function calculateBestDay() {
+        const milestones = challengeData.milestones.filter((m) => !m.isSystem);
+        const dayGroups = {};
+
+        milestones.forEach((milestone) => {
+          const date = new Date(milestone.jumpTime).toDateString();
+          dayGroups[date] = (dayGroups[date] || 0) + 1;
+        });
+
+        return Math.max(0, ...Object.values(dayGroups));
+      }
+
+      function calculateTotalAltitude() {
+        return challengeData.milestones
+          .filter((m) => !m.isSystem && m.altitude)
+          .reduce((total, milestone) => total + milestone.altitude, 0);
+      }
+
+      function updateCurrentLocationDisplay() {
+        const banner = document.getElementById("liveLocationBanner");
+        const section = document.getElementById("currentLocationSection");
+        const locationGrid = document.getElementById("locationGrid");
+
+        if (challengeData.currentLocation && challengeData.isActive) {
+          const loc = challengeData.currentLocation;
+
+          // Update banner
+          document.getElementById("currentLocationState").textContent =
+            loc.state;
+          document.getElementById(
+            "currentLocationDetails"
+          ).textContent = `${loc.city} • ${loc.status} • ${loc.weather.condition}`;
+          banner.style.display = "block";
+
+          // Update detailed section
+          const timeUntilJump = Math.max(
+            0,
+            (new Date(loc.estimatedJumpTime) - new Date()) / (1000 * 60 * 60)
+          );
+
+          locationGrid.innerHTML = `
+                    <div class="location-item">
+                        <span class="location-item-icon">🏙️</span>
+                        <span class="location-item-text"><strong>City:</strong> ${
+                          loc.city
+                        }, ${loc.state}</span>
+                    </div>
+                    <div class="location-item">
+                        <span class="location-item-icon">⏰</span>
+                        <span class="location-item-text"><strong>Arrival:</strong> ${formatDateTime(
+                          new Date(loc.arrivalTime)
+                        )}</span>
+                    </div>
+                    <div class="location-item">
+                        <span class="location-item-icon">🎯</span>
+                        <span class="location-item-text"><strong>Status:</strong> ${
+                          loc.status
+                        }</span>
+                    </div>
+                    <div class="location-item">
+                        <span class="location-item-icon">🌤️</span>
+                        <span class="location-item-text"><strong>Weather:</strong> ${
+                          loc.weather.condition
+                        }, ${loc.weather.temperature}°F</span>
+                    </div>
+                    <div class="location-item">
+                        <span class="location-item-icon">💨</span>
+                        <span class="location-item-text"><strong>Wind:</strong> ${
+                          loc.weather.windSpeed
+                        } mph</span>
+                    </div>
+                    <div class="location-item">
+                        <span class="location-item-icon">👁️</span>
+                        <span class="location-item-text"><strong>Visibility:</strong> ${
+                          loc.weather.visibility
+                        } miles</span>
+                    </div>
+                    <div class="location-item">
+                        <span class="location-item-icon">🪂</span>
+                        <span class="location-item-text"><strong>Drop Zone:</strong> ${
+                          loc.dropZone
+                        }</span>
+                    </div>
+                    <div class="location-item">
+                        <span class="location-item-icon">⏳</span>
+                        <span class="location-item-text"><strong>Est. Jump:</strong> ${
+                          timeUntilJump > 0
+                            ? timeUntilJump.toFixed(1) + "h"
+                            : "Soon"
+                        }</span>
+                    </div>
+                `;
+
+          section.style.display = "block";
+        } else {
+          banner.style.display = "none";
+          section.style.display = "none";
+        }
+      }
+
+      function updateTimerStatus() {
+        const statusElement = document.getElementById("timerStatus");
+        const completed = challengeData.completedStates.length;
+
+        if (!challengeData.startTime) {
+          statusElement.textContent = "Challenge Not Started";
+          statusElement.style.background = "var(--gray)";
+        } else if (challengeData.isActive) {
+          statusElement.textContent = "🚀 Challenge Active";
+          statusElement.style.background = "var(--success)";
+        } else if (completed === 50) {
+          statusElement.textContent = "🏆 Challenge Completed!";
+          statusElement.style.background = "var(--warning)";
+        } else {
+          statusElement.textContent = "⏸️ Challenge Paused";
+          statusElement.style.background = "var(--danger)";
+        }
+      }
+
+      function updateStatesGrid() {
+        const grid = document.getElementById("statesGrid");
+        const completed = challengeData.completedStates.length;
+        const currentState = challengeData.currentLocation?.state;
+
+        // Update filter counts
+        document.getElementById("completedCount").textContent = completed;
+        document.getElementById("pendingCount").textContent = 50 - completed;
+        document.getElementById("currentCount").textContent = currentState
+          ? 1
+          : 0;
+
+        grid.innerHTML = "";
+
+        STATES.forEach((state, index) => {
+          const stateCard = createStateCard(state, index);
+          grid.appendChild(stateCard);
+        });
+
+        // Apply current filter
+        filterStates(currentFilter, false);
+      }
+
+      function createStateCard(state, index) {
+        const card = document.createElement("div");
+        card.className = "state-card";
+        card.id = `state-${state.replace(/\s+/g, "-")}`;
+
+        const isCompleted = challengeData.completedStates.includes(state);
+        const isCurrent = challengeData.currentLocation?.state === state;
+        const milestone = challengeData.milestones.find(
+          (m) => m.state === state
+        );
+
+        if (isCompleted) {
+          card.classList.add("completed");
+        }
+
+        if (isCurrent && challengeData.isActive) {
+          card.classList.add("current-location");
+        }
+
+        let statusHTML = "";
+        let detailsHTML = "";
+        let metaHTML = "";
+        let weatherHTML = "";
+
+        if (isCurrent && challengeData.isActive) {
+          statusHTML =
+            '<div class="state-status current">🔴 LIVE<div class="state-live-indicator"></div></div>';
+          detailsHTML = `
+                    <div class="state-details">
+                        <strong>Current Location:</strong> ${challengeData.currentLocation.city}<br>
+                        <strong>Status:</strong> ${challengeData.currentLocation.status}<br>
+                        <strong>Drop Zone:</strong> ${challengeData.currentLocation.dropZone}
+                    </div>
+                `;
+
+          const weather = challengeData.currentLocation.weather;
+          weatherHTML = `
+                    <div class="weather-widget">
+                        <div class="weather-info">
+                            <span>🌤️</span>
+                            <span>${weather.condition} • ${weather.temperature}°F • ${weather.windSpeed}mph winds</span>
+                        </div>
+                    </div>
+                `;
+
+          metaHTML = `
+                    <div class="state-meta">
+                        Live location • Arrived: ${formatTime(
+                          new Date(challengeData.currentLocation.arrivalTime)
+                        )} •
+                        Est. Jump: ${formatTime(
+                          new Date(
+                            challengeData.currentLocation.estimatedJumpTime
+                          )
+                        )}
+                    </div>
+                `;
+        } else if (isCompleted && milestone) {
+          statusHTML = '<div class="state-status completed">✅ Completed</div>';
+          detailsHTML = `
+                    <div class="state-details">
+                        <strong>Location:</strong> ${milestone.location}<br>
+                        <strong>Altitude:</strong> ${
+                          milestone.altitude?.toLocaleString() || "N/A"
+                        } ft<br>
+                        <strong>Jump Date:</strong> ${formatDate(
+                          new Date(milestone.jumpTime)
+                        )}
+                    </div>
+                `;
+
+          if (milestone.weather && milestone.weather !== "Not recorded") {
+            weatherHTML = `
+                        <div class="weather-widget">
+                            <div class="weather-info">
+                                <span>🌤️</span>
+                                <span>${milestone.weather}</span>
+                            </div>
+                        </div>
+                    `;
+          }
+
+          metaHTML = `
+                    <div class="state-meta">
+                        Completion Order: #${
+                          milestone.completionOrder || "N/A"
+                        } •
+                        ${milestone.videos?.length || 0} video(s) •
+                        Click for details
+                    </div>
+                `;
+        } else {
+          statusHTML = '<div class="state-status">⏳ Pending</div>';
+          detailsHTML =
+            '<div class="state-details">Awaiting skydiving completion</div>';
+          metaHTML =
+            '<div class="state-meta">Not yet visited • Click for info</div>';
+        }
+
+        card.innerHTML = `
+                <div class="state-header">
+                    <div class="state-name">${state}</div>
+                    ${statusHTML}
+                </div>
+                ${detailsHTML}
+                ${weatherHTML}
+                ${metaHTML}
+            `;
+
+        // Add click handler
+        card.addEventListener("click", () => openStateModal(state));
+
+        return card;
+      }
+
+      // Modal Functions
+      function openStateModal(state) {
+        const modal = document.getElementById("stateModal");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalSubtitle = document.getElementById("modalSubtitle");
+        const modalContent = document.getElementById("modalContent");
+
+        const milestone = challengeData.milestones.find(
+          (m) => m.state === state
+        );
+        const isCompleted = challengeData.completedStates.includes(state);
+        const isCurrent = challengeData.currentLocation?.state === state;
+
+        // Set modal title
+        modalTitle.textContent = state;
+
+        if (isCurrent && challengeData.isActive) {
+          modalSubtitle.textContent = "🔴 LIVE - Current Location";
+          modalContent.innerHTML = generateCurrentLocationContent(state);
+        } else if (isCompleted && milestone) {
+          modalSubtitle.textContent = "Completed Skydiving Challenge";
+          modalContent.innerHTML = generateCompletedStateContent(milestone);
+        } else {
+          modalSubtitle.textContent = "Pending Challenge State";
+          modalContent.innerHTML = generatePendingStateContent(state);
+        }
+
+        // Show modal
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeStateModal() {
+        const modal = document.getElementById("stateModal");
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      function generateCurrentLocationContent(state) {
+        const loc = challengeData.currentLocation;
+        const timeUntilJump = Math.max(
+          0,
+          (new Date(loc.estimatedJumpTime) - new Date()) / (1000 * 60 * 60)
+        );
+
+        return `
+                <div class="modal-section">
+                    <h3 class="modal-section-title">🔴 LIVE STATUS</h3>
+                    <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 2rem; border-radius: 1rem; border-left: 4px solid var(--warning); margin-bottom: 2rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="width: 16px; height: 16px; background: var(--danger); border-radius: 50%; animation: livePulse 1s ease-in-out infinite;"></div>
+                            <h4 style="font-size: 1.25rem; font-weight: 700; color: var(--dark);">Currently in ${state}</h4>
+                        </div>
+                        <p style="color: var(--dark); margin-bottom: 1rem;">${
+                          loc.status
+                        }</p>
+                        <div style="font-size: 0.875rem; color: var(--gray);">
+                            Last updated: ${formatDateTime(new Date())}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3 class="modal-section-title">📍 Location Details</h3>
+                    <div class="state-info-grid">
+                        <div class="state-info-item">
+                            <div class="state-info-label">Current City</div>
+                            <div class="state-info-value">${loc.city}</div>
+                        </div>
+                        <div class="state-info-item">
+                            <div class="state-info-label">Arrival Time</div>
+                            <div class="state-info-value">${formatDateTime(
+                              new Date(loc.arrivalTime)
+                            )}</div>
+                        </div>
+                        <div class="state-info-item">
+                            <div class="state-info-label">Drop Zone</div>
+                            <div class="state-info-value">${loc.dropZone}</div>
+                        </div>
+                        <div class="state-info-item">
+                            <div class="state-info-label">Time Until Jump</div>
+                            <div class="state-info-value">${
+                              timeUntilJump > 0
+                                ? timeUntilJump.toFixed(1) + " hours"
+                                : "Imminent"
+                            }</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3 class="modal-section-title">🌤️ Current Weather Conditions</h3>
+                    <div class="state-info-grid">
+                        <div class="state-info-item">
+                            <div class="state-info-label">Conditions</div>
+                            <div class="state-info-value">${
+                              loc.weather.condition
+                            }</div>
+                        </div>
+                        <div class="state-info-item">
+                            <div class="state-info-label">Temperature</div>
+                            <div class="state-info-value">${
+                              loc.weather.temperature
+                            }°F</div>
+                        </div>
+                        <div class="state-info-item">
+                            <div class="state-info-label">Wind Speed</div>
+                            <div class="state-info-value">${
+                              loc.weather.windSpeed
+                            } mph</div>
+                        </div>
+                        <div class="state-info-item">
+                            <div class="state-info-label">Visibility</div>
+                            <div class="state-info-value">${
+                              loc.weather.visibility
+                            } miles</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3 class="modal-section-title">ℹ️ Jump Status</h3>
+                    <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 0.5rem;">
+                        <p><strong>Status:</strong> ${loc.status}</p>
+                        <p><strong>Estimated Jump Time:</strong> ${formatDateTime(
+                          new Date(loc.estimatedJumpTime)
+                        )}</p>
+                        <p><strong>Weather Assessment:</strong> ${getWeatherAssessment(
+                          loc.weather
+                        )}</p>
+                    </div>
+                </div>
+            `;
+      }
+
+      function getWeatherAssessment(weather) {
+        if (weather.windSpeed <= 10 && weather.visibility >= 10) {
+          return "✅ Excellent conditions for jumping";
+        } else if (weather.windSpeed <= 15 && weather.visibility >= 8) {
+          return "⚠️ Good conditions with minor considerations";
+        } else {
+          return "❌ Weather monitoring required";
+        }
+      }
+
+      function generateCompletedStateContent(milestone) {
+        const jumpDate = new Date(milestone.jumpTime);
+        const recordedDate = new Date(
+          milestone.recordedAt || milestone.jumpTime
+        );
+
+        return `
+                <div class="modal-section">
+                    <h3 class="modal-section-title">📊 Jump Summary</h3>
+                    <div class="state-info-grid">
+                        <div class="state-info-item">
+                            <div class="state-info-label">Jump Date</div>
+                            <div class="state-info-value">${formatDateTime(
+                              jumpDate
+                            )}</div>
+                        </div>
+                        <div class="state-info-item">
+                            <div class="state-info-label">Altitude</div>
+                            <div class="state-info-value">${
+                              milestone.altitude?.toLocaleString() || "N/A"
+                            } ft</div>
+                        </div>
+                        <div class="state-info-item">
+                            <div class="state-info-label">Location</div>
+                            <div class="state-info-value">${
+                              milestone.location || "N/A"
+                            }</div>
+                        </div>
+                        <div class="state-info-item">
+                            <div class="state-info-label">Duration</div>
+                            <div class="state-info-value">${
+                              milestone.duration
+                                ? milestone.duration + "s"
+                                : "N/A"
+                            }</div>
+                        </div>
+                        <div class="state-info-item">
+                            <div class="state-info-label">Weather</div>
+                            <div class="state-info-value">${
+                              milestone.weather || "Not recorded"
+                            }</div>
+                        </div>
+                        <div class="state-info-item">
+                            <div class="state-info-label">Completion Order</div>
+                            <div class="state-info-value">#${
+                              milestone.completionOrder || "N/A"
+                            } of 50</div>
+                        </div>
+                    </div>
+                </div>
+
+                ${
+                  milestone.notes
+                    ? `
+                <div class="modal-section">
+                    <h3 class="modal-section-title">📝 Jump Notes</h3>
+                    <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid var(--primary);">
+                        <p style="font-style: italic; color: var(--gray); line-height: 1.6;">"${milestone.notes}"</p>
+                    </div>
+                </div>
+                `
+                    : ""
+                }
+
+                <div class="modal-section">
+                    <h3 class="modal-section-title">🎬 Video Evidence</h3>
+                    ${generateVideoGallery(milestone)}
+                </div>
+
+                <div class="modal-section">
+                    <h3 class="modal-section-title">ℹ️ Record Information</h3>
+                    <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 0.5rem; font-size: 0.875rem; color: var(--gray);">
+                        <p><strong>Recorded:</strong> ${formatDateTime(
+                          recordedDate
+                        )}</p>
+                        <p><strong>Milestone ID:</strong> ${milestone.id}</p>
+                        <p><strong>Data Integrity:</strong> ✅ Verified</p>
+                        <p><strong>Videos:</strong> ${
+                          milestone.videos?.length || 0
+                        } files</p>
+                    </div>
+                </div>
+            `;
+      }
+
+      function generatePendingStateContent(state) {
+        return `
+                <div class="no-data">
+                    <div class="no-data-icon">📍</div>
+                    <h3 style="margin-bottom: 1rem; color: var(--dark);">State Not Yet Completed</h3>
+                    <p style="margin-bottom: 2rem; color: var(--gray);">
+                        ${state} is still pending completion in the 50-state skydiving challenge.
+                        Once the skydive is completed and recorded, detailed information and videos will appear here.
+                    </p>
+                    <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid var(--warning);">
+                        <h4 style="color: var(--dark); margin-bottom: 0.5rem;">What to expect:</h4>
+                        <ul style="text-align: left; color: var(--gray); padding-left: 1rem;">
+                            <li>Jump details (date, time, altitude)</li>
+                            <li>Drop zone location information</li>
+                            <li>Weather conditions</li>
+                            <li>Jump duration and notes</li>
+                            <li>Video evidence of the skydive</li>
+                            <li>Completion order in the challenge</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+      }
+
+      function generateVideoGallery(milestone) {
+        let videos = [];
+
+        if (milestone.videos && milestone.videos.length > 0) {
+          videos.push(...milestone.videos);
+        }
+
+        // Add sample videos for demonstration
+        if (milestone.completionOrder && milestone.completionOrder <= 5) {
+          videos.push({
+            fileName: "pre-jump-preparation.mp4",
+            originalName: "Pre-jump preparation",
+            type: "video/mp4",
+            uploadedAt: milestone.jumpTime,
+            size: 12300000,
+          });
+          videos.push({
+            fileName: "landing-footage.mp4",
+            originalName: "Landing footage",
+            type: "video/mp4",
+            uploadedAt: milestone.jumpTime,
+            size: 8700000,
+          });
+        }
+
+        if (videos.length === 0) {
+          return `
+                    <div class="no-data">
+                        <div class="no-data-icon">📹</div>
+                        <h4 style="margin-bottom: 0.5rem; color: var(--dark);">No Videos Available</h4>
+                        <p style="color: var(--gray);">No video evidence has been uploaded for this jump yet.</p>
+                    </div>
+                `;
+        }
+
+        return `
+                <div class="video-gallery">
+                    ${videos
+                      .map(
+                        (video, index) => `
+                        <div class="video-item">
+                            <div class="video-player" onclick="playVideo('${
+                              video.fileName || video.originalName
+                            }', '${video.type || "video/mp4"}')">
+                                <video preload="metadata" poster="">
+                                    <source src="#" type="${
+                                      video.type || "video/mp4"
+                                    }">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <div class="video-play-button">▶</div>
+                            </div>
+                            <div class="video-info">
+                                <div class="video-title">${
+                                  video.originalName || video.fileName
+                                }</div>
+                                <div class="video-meta">
+                                    ${formatFileSize(
+                                      video.size
+                                    )} • ${formatDate(
+                          new Date(video.uploadedAt)
+                        )}
+                                </div>
+                            </div>
+                        </div>
+                    `
+                      )
+                      .join("")}
+                </div>
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-primary); border-radius: 0.5rem; font-size: 0.875rem; color: var(--gray);">
+                    🎬 <strong>Video Playback:</strong> Click the play button to watch skydiving footage. Videos are stored locally and ready for immediate playback.
+                </div>
+            `;
+      }
+
+      function formatFileSize(bytes) {
+        if (!bytes) return "Unknown size";
+        const mb = bytes / (1024 * 1024);
+        return mb.toFixed(1) + " MB";
+      }
+
+      function playVideo(videoTitle, videoType) {
+        // Create video modal for playback
+        const videoModal = document.createElement("div");
+        videoModal.className = "modal-overlay active";
+        videoModal.style.background = "rgba(0, 0, 0, 0.95)";
+
+        videoModal.innerHTML = `
+                <div class="modal" style="max-width: 90vw; max-height: 90vh; background: var(--dark); border-radius: 1rem; overflow: hidden;">
+                    <div class="modal-header" style="background: var(--dark); border-bottom: 1px solid var(--gray); color: var(--white);">
+                        <h2 class="modal-title" style="color: var(--white);">🎬 ${videoTitle}</h2>
+                        <p class="modal-subtitle" style="color: var(--gray-light);">Skydiving Video Playback</p>
+                        <button class="modal-close" onclick="closeVideoModal()" style="color: var(--white);">&times;</button>
+                    </div>
+                    <div style="padding: 2rem; text-align: center;">
+                        <div style="background: var(--gradient-primary); border-radius: 1rem; padding: 3rem; margin-bottom: 2rem;">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">🎬</div>
+                            <h3 style="color: var(--white); margin-bottom: 1rem;">Video Player</h3>
+                            <p style="color: var(--white); opacity: 0.9; margin-bottom: 2rem;">
+                                Playing: ${videoTitle}<br>
+                                Format: ${videoType.toUpperCase()}
+                            </p>
+                            <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                                <p style="color: var(--white); font-size: 0.875rem;">
+                                    🎥 This is a demonstration of the video playback interface.<br>
+                                    In a production environment, actual skydiving footage would play here.
+                                </p>
+                            </div>
+                            <button onclick="closeVideoModal()" style="background: var(--white); color: var(--primary); border: none; padding: 0.75rem 2rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">
+                                Close Player
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        document.body.appendChild(videoModal);
+        document.body.style.overflow = "hidden";
+
+        // Auto-close after 5 seconds for demo
+        setTimeout(() => {
+          if (document.body.contains(videoModal)) {
+            closeVideoModal();
+          }
+        }, 5000);
+      }
+
+      function closeVideoModal() {
+        const videoModal = document.querySelector(
+          '.modal-overlay[style*="rgba(0, 0, 0, 0.95)"]'
+        );
+        if (videoModal) {
+          document.body.removeChild(videoModal);
+          document.body.style.overflow = "auto";
+        }
+      }
+
+      function filterStates(filter, updateButton = true) {
+        currentFilter = filter;
+        const cards = document.querySelectorAll(".state-card");
+
+        if (updateButton && event && event.target) {
+          // Update active button
+          document.querySelectorAll(".filter-btn").forEach((btn) => {
+            btn.classList.remove("active");
+          });
+          event.target.classList.add("active");
+        }
+
+        // Filter cards
+        cards.forEach((card) => {
+          const isCompleted = card.classList.contains("completed");
+          const isCurrent = card.classList.contains("current-location");
+          let show = false;
+
+          switch (filter) {
+            case "all":
+              show = true;
+              break;
+            case "completed":
+              show = isCompleted;
+              break;
+            case "pending":
+              show = !isCompleted && !isCurrent;
+              break;
+            case "current":
+              show = isCurrent;
+              break;
+          }
+
+          card.style.display = show ? "block" : "none";
+        });
+      }
+
+      function updateMilestonesList() {
+        const list = document.getElementById("milestonesList");
+
+        // Keep system initialization message
+        const systemItems = list.querySelectorAll(".milestone-item.system");
+        list.innerHTML = "";
+        systemItems.forEach((item) => list.appendChild(item));
+
+        // Add milestones in reverse chronological order
+        challengeData.milestones
+          .sort(
+            (a, b) =>
+              new Date(b.recordedAt || b.timestamp) -
+              new Date(a.recordedAt || a.timestamp)
+          )
+          .slice(0, 10) // Show last 10 milestones
+          .forEach((milestone) => {
+            const item = createMilestoneItem(milestone);
+            list.appendChild(item);
+          });
+      }
+
+      function createMilestoneItem(milestone) {
+        const item = document.createElement("div");
+        item.className = "milestone-item";
+
+        if (milestone.isSystem) {
+          item.classList.add("system");
+          item.innerHTML = `
+                    <div class="milestone-header">
+                        <div class="milestone-title">${milestone.message}</div>
+                        <div class="milestone-time">${formatDateTime(
+                          new Date(milestone.timestamp)
+                        )}</div>
+                    </div>
+                `;
+        } else {
+          item.classList.add("completed");
+          item.innerHTML = `
+                    <div class="milestone-header">
+                        <div class="milestone-title">🪂 ${
+                          milestone.state
+                        } - Jump #${milestone.completionOrder || "N/A"}</div>
+                        <div class="milestone-time">${formatDateTime(
+                          new Date(milestone.jumpTime)
+                        )}</div>
+                    </div>
+                    <div class="milestone-details">
+                        <div><strong>Location:</strong> ${
+                          milestone.location || "N/A"
+                        }</div>
+                        <div><strong>Altitude:</strong> ${
+                          milestone.altitude?.toLocaleString() || "N/A"
+                        } ft</div>
+                        <div><strong>Weather:</strong> ${
+                          milestone.weather || "Not recorded"
+                        }</div>
+                        ${
+                          milestone.duration
+                            ? `<div><strong>Duration:</strong> ${milestone.duration}s</div>`
+                            : ""
+                        }
+                    </div>
+                    ${
+                      milestone.notes
+                        ? `<p style="margin-top: 1rem; font-style: italic; color: var(--gray);">"${milestone.notes}"</p>`
+                        : ""
+                    }
+                `;
+        }
+
+        return item;
+      }
+
+      // Utility functions
+      function animateNumber(elementId, targetValue, suffix = "") {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+
+        const currentValue = parseInt(element.textContent) || 0;
+
+        if (currentValue === targetValue) return;
+
+        const duration = 1000;
+        const startTime = performance.now();
+        const startValue = currentValue;
+
+        function updateNumber(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const value = Math.round(
+            startValue + (targetValue - startValue) * progress
+          );
+
+          element.textContent = value + suffix;
+
+          if (progress < 1) {
+            requestAnimationFrame(updateNumber);
+          }
+        }
+
+        requestAnimationFrame(updateNumber);
+      }
+
+      function formatDateTime(date) {
+        return date.toLocaleString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      function formatDate(date) {
+        return date.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+        });
+      }
+
+      function formatTime(date) {
+        return date.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      function formatDuration(milliseconds) {
+        const hours = Math.floor(milliseconds / (1000 * 60 * 60));
+        const minutes = Math.floor(
+          (milliseconds % (1000 * 60 * 60)) / (1000 * 60)
+        );
+
+        if (hours > 0) {
+          return `${hours}h ${minutes}m`;
+        } else if (minutes > 0) {
+          return `${minutes}m`;
+        } else {
+          return "<1m";
+        }
+      }
+
+      // Real-time updates
+      function startRealTimeUpdates() {
+        // Update every second
+        setInterval(() => {
+          updateTimer();
+          updateTimerStatus();
+          updateCurrentLocationDisplay();
+        }, 1000);
+
+        // Simulate location updates every 30 seconds
+        setInterval(() => {
+          if (challengeData.isActive && challengeData.currentLocation) {
+            // Simulate status updates
+            const statuses = [
+              "Preparing for jump",
+              "Equipment check in progress",
+              "Weather assessment",
+              "Final preparations",
+              "Ready for takeoff",
+            ];
+
+            challengeData.currentLocation.status =
+              statuses[Math.floor(Math.random() * statuses.length)];
+            updateCurrentLocationDisplay();
+            updateStatesGrid();
+          }
+        }, 30000);
+
+        // Check for data updates every 5 seconds
+        setInterval(() => {
+          const currentData = JSON.stringify(challengeData);
+          loadChallengeData();
+          const newData = JSON.stringify(challengeData);
+
+          if (currentData !== newData) {
+            updateAllDisplays();
+            console.log("🔄 Data updated from external source");
+          }
+        }, 5000);
+      }
+
+      // Close modal when clicking outside
+      document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("modal-overlay")) {
+          closeStateModal();
+          closeVideoModal();
+        }
+      });
+
+      // Close modal with escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeStateModal();
+          closeVideoModal();
+        }
+      });
+
+      // Initialize when page loads
+      document.addEventListener("DOMContentLoaded", initializeApp);
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      console.log("🪂 SkyRecord Public Tracking System Ready");
+    </script>
+  </body>
+</html>
